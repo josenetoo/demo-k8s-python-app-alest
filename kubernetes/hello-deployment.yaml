@@ -15,22 +15,16 @@ spec:
       labels:
         app: hello-world
     spec:
-      affinity:
-        nodeAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-            nodeSelectorTerms:
-            - matchExpressions:
-              - key: kubernetes.io/arch
-                operator: In
-                values:
-                - arm64
+      nodeSelector:
+        kubernetes.io/arch: arm64
       tolerations:
-      - key: "arm64"
-        operator: "Exists"
+      - key: "kubernetes.io/arch"
+        operator: "Equal"
+        value: "arm64"
         effect: "NoSchedule"
       containers:
       - name: hello-world-container
-        image: josenetoalest/demo-python:1.1.1
+        image: josenetoalest/demo-python:1.1.2-arm64
         ports:
         - containerPort: 8080
         resources:
