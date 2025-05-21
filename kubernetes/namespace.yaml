@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: demo-python
+  labels:
+    name: demo-python
+    app: hello-world
