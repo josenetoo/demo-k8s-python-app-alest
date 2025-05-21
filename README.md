@@ -32,16 +32,36 @@ demo-k8s-python-app/
 
 ## Versioning
 
-This project uses semantic versioning (MAJOR.MINOR.PATCH). The current version is stored in `version.txt`.
+This project uses semantic versioning (MAJOR.MINOR.PATCH) following Windsurf principles for reproducible builds. The current version is stored in `version.txt`.
 
-To build and push a versioned Docker image:
+### Version Management
+
+We use a robust version management approach to ensure consistency across the entire project:
 
 ```bash
-# Run the build script
+# Update to a specific version
+./scripts/version-manager.sh 1.2.0
+
+# Auto-increment patch version (e.g., 1.1.1 → 1.1.2)
+./scripts/version-manager.sh
+```
+
+This script updates the version in both `version.txt` and the Kubernetes deployment manifest.
+
+### Local Development
+
+For local development and testing, you can build the Docker image without pushing to Docker Hub:
+
+```bash
+# Build the image locally
 ./build.sh
 ```
 
-This will build and push the image with both the version tag and `latest` tag.
+This will build the image with both the version tag and `latest` tag but will not push it to Docker Hub.
+
+### Architecture Support
+
+This project is configured to build and deploy arm64 architecture images for Kubernetes. The CI/CD pipeline handles building and pushing these platform-specific images.
 
 ## Building and Running Locally
 

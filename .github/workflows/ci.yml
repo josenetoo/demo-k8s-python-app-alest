@@ -54,9 +54,25 @@ jobs:
       - name: Update Kubernetes manifests
         run: |
           VERSION=${{ steps.get_version.outputs.VERSION }}
-          sed -i "s|josenetoalest/demo-python:.*|josenetoalest/demo-python:${VERSION}|g" kubernetes/hello-deployment.yaml
+          
+          # Use the version manager script to update the deployment manifest
+          # The script handles both updating version.txt and the Kubernetes manifest
+          chmod +x ./scripts/version-manager.sh
+          
+          # Configure Git
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'actions@github.com'
+          
+          # Update the deployment manifest with the current version
+          # No need to increment the version since we're just ensuring consistency
+          sed -i "s|josenetoalest/demo-python:.*-arm64|josenetoalest/demo-python:${VERSION}-arm64|g" kubernetes/hello-deployment.yaml
+          
+          # Commit and push changes if there are any
           git add kubernetes/hello-deployment.yaml
-          git diff --staged --quiet || git commit -m "Update deployment image to version ${VERSION}"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit - deployment manifest already up to date"
+          else
+            git commit -m "ci: Update deployment image to version ${VERSION}-arm64"
+            git push
+            echo "Successfully updated deployment manifest with new image tag: ${VERSION}-arm64"
+          fi
