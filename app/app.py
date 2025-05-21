@@ -8,7 +8,7 @@ app = Flask(__name__)
 def hello():
     hostname = socket.gethostname()
     return jsonify(
-        message="Hello World Alestianos",
+        message="Hello World + Enterprise Vibe Coding",
         hostname=hostname,
         environment=os.environ.get("ENVIRONMENT", "development")
     )
