@@ -1,0 +1,15 @@
+.git
+.gitignore
+.vscode
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+*.md
+kubernetes/
+README.md
+PLANNING.MD
+TASKS.MD
