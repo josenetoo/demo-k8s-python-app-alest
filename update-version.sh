@@ -25,7 +25,7 @@ echo "Updating version from $CURRENT_VERSION to $NEW_VERSION"
 echo $NEW_VERSION > version.txt
 
 # Update Kubernetes deployment manifest with new version
-sed -i '' "s|josenetoalest/demo-python:$CURRENT_VERSION|josenetoalest/demo-python:$NEW_VERSION|g" kubernetes/hello-deployment.yaml
+sed -i '' "s|josenetoalest/demo-python:$CURRENT_VERSION-arm64|josenetoalest/demo-python:$NEW_VERSION-arm64|g" kubernetes/hello-deployment.yaml
 
 echo "Version updated to $NEW_VERSION"
 echo "Changes:"
