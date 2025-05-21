@@ -30,7 +30,7 @@ spec:
         effect: "NoSchedule"
       containers:
       - name: hello-world-container
-        image: josenetoalest/demo-python:1.1.1-arm64
+        image: josenetoalest/demo-python:1.1.1
         ports:
         - containerPort: 8080
         resources:
